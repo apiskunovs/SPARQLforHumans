@@ -7,7 +7,7 @@ namespace SparqlForHumans.Lucene
     {
         private static string _baseFolder = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            "SparqlForHumans");
+            "SparqlForHumans", "Wikidata");
 
         public static string EntityIndexPath => Path.Combine(BaseFolder, "LuceneEntitiesIndex");
         public static string PropertyIndexPath => Path.Combine(BaseFolder, "LucenePropertiesIndex");
@@ -16,7 +16,7 @@ namespace SparqlForHumans.Lucene
         {
             _baseFolder = Environment.ExpandEnvironmentVariables(baseFolder);
         }
-        private static string BaseFolder => _baseFolder;
+        public static string BaseFolder => _baseFolder;
 
     }
 }

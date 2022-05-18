@@ -5,25 +5,24 @@ namespace SparqlForHumans.Server
 {
     public class LuceneConfig
     {
-        private string _entityIndexPath;
-        private string _propertyIndexPath;
+        public string BaseFolder
+        {
+            get { return LuceneDirectoryDefaults.BaseFolder; }
+            set { LuceneDirectoryDefaults.SetBaseFolder(value); }
+        }
         public string EntityIndexPath
         {
-            get { return this._entityIndexPath; }
-            set { this._entityIndexPath = Environment.ExpandEnvironmentVariables(value); }
+            get { return LuceneDirectoryDefaults.EntityIndexPath; }
         }
         public string PropertyIndexPath
         {
-            get { return this._propertyIndexPath; }
-            set { this._propertyIndexPath = Environment.ExpandEnvironmentVariables(value); }
+            get { return LuceneDirectoryDefaults.PropertyIndexPath; }
         }
 
         public bool InMemoryEngineEnabled { get; set; }
 
         public LuceneConfig()
         {
-            EntityIndexPath = LuceneDirectoryDefaults.EntityIndexPath;
-            PropertyIndexPath = LuceneDirectoryDefaults.PropertyIndexPath; 
             InMemoryEngineEnabled = true;
         }
 
