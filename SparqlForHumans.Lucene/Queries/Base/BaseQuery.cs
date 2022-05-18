@@ -14,6 +14,8 @@ namespace SparqlForHumans.Lucene.Queries.Base
     public abstract class BaseQuery<T> : IQuery
         where T : Subject
     {
+        private readonly NLog.Logger _logger = Logger.Logger.Init();
+
         public BaseQuery(string luceneIndexPath, IEnumerable<string> searchStrings, int resultsLimit = 1)
         {
             LuceneIndexPath = luceneIndexPath;
@@ -40,11 +42,14 @@ namespace SparqlForHumans.Lucene.Queries.Base
 
         internal virtual IReadOnlyList<Document> GetDocuments()
         {
+            _logger.Debug("GetDocuments Start");
             var list = new List<Document>();
 
+            _logger.Debug($"Search strings: {string.Join(',', SearchStrings)}");
             if (SearchStrings.All(IsInvalidSearchString))
                 return list;
 
+            _logger.Debug($"LuceneIndexPath = {LuceneIndexPath} ");
             using var luceneDirectory = FSDirectory.Open(LuceneIndexPath);
             using var luceneDirectoryReader = DirectoryReader.Open(luceneDirectory);
             var searcher = new IndexSearcher(luceneDirectoryReader);
@@ -52,11 +57,19 @@ namespace SparqlForHumans.Lucene.Queries.Base
             foreach (var searchString in SearchStrings) {
                 if (IsInvalidSearchString(searchString)) continue;
                 var preparedSearchTerm = PrepareSearchTerm(searchString);
+                _logger.Debug($"preparedSearchTerm = {preparedSearchTerm} ");
 
                 var query = ParserUtilities.ParseQuery(preparedSearchTerm, queryParser);
+                _logger.Info($"query = {query.ToString()} ");
+
                 var hits = searcher.Search(query, Filter, ResultsLimit).ScoreDocs;
+                _logger.Debug($"hits [{hits.Count()}] = {hits.SerializeJsonString()}");
+
                 list.AddRange(hits.Select(hit => searcher.Doc(hit.Doc)));
+                _logger.Debug($"list [{list.Count()}]: {(list.Count > 0 ? list[0].SerializeJsonString() : "")}");
             }
+
+            _logger.Info($"GetDocuments End [{list.Count()}]");
 
             return list;
         }

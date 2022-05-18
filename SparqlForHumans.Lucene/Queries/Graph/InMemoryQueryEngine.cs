@@ -172,12 +172,12 @@ namespace SparqlForHumans.Lucene.Queries.Graph
                 foreach (var domainId in domainIds) {
                     if (_typeIdDomainPropertiesDictionary.ContainsKey(domainId)) {
                         var domainProperties = _typeIdDomainPropertiesDictionary[domainId];
-                        propertyDomainOutgoingPropertiesIds[propertyId].AddAll(domainProperties);
+                        propertyDomainOutgoingPropertiesIds[propertyId].UnionWith(domainProperties);
                     }
 
                     if (_typeIdRangePropertiesDictionary.ContainsKey(domainId)) {
                         var rangeProperties = _typeIdRangePropertiesDictionary[domainId];
-                        propertyDomainIncomingPropertiesIds[propertyId].AddAll(rangeProperties);
+                        propertyDomainIncomingPropertiesIds[propertyId].UnionWith(rangeProperties);
                     }
                 }
             }
@@ -192,12 +192,12 @@ namespace SparqlForHumans.Lucene.Queries.Graph
                 foreach (var rangeId in rangeIds) {
                     if (_typeIdDomainPropertiesDictionary.ContainsKey(rangeId)) {
                         var domainProperties = _typeIdDomainPropertiesDictionary[rangeId];
-                        propertyRangeOutgoingPropertiesIds[propertyId].AddAll(domainProperties);
+                        propertyRangeOutgoingPropertiesIds[propertyId].UnionWith(domainProperties);
                     }
 
                     if (_typeIdRangePropertiesDictionary.ContainsKey(rangeId)) {
                         var rangeProperties = _typeIdRangePropertiesDictionary[rangeId];
-                        propertyRangeIncomingPropertiesIds[propertyId].AddAll(rangeProperties);
+                        propertyRangeIncomingPropertiesIds[propertyId].UnionWith(rangeProperties);
                     }
                 }
             }

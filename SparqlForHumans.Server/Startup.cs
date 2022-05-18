@@ -13,7 +13,17 @@ namespace SparqlForHumans.Server
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            StaticQueryGraphResults.InMemoryQueryEngine.Init(LuceneDirectoryDefaults.EntityIndexPath, LuceneDirectoryDefaults.PropertyIndexPath);
+
+            var section = Configuration.GetSection(nameof(LuceneConfig));
+            var luceneConfig = section.Get<LuceneConfig>();
+
+            System.Console.WriteLine(luceneConfig.ToString());
+
+            if (luceneConfig.InMemoryEngineEnabled)
+            {
+                //StaticQueryGraphResults.InMemoryQueryEngine.Init(LuceneDirectoryDefaults.EntityIndexPath, LuceneDirectoryDefaults.PropertyIndexPath);
+                StaticQueryGraphResults.InMemoryQueryEngine.Init(luceneConfig.EntityIndexPath, luceneConfig.PropertyIndexPath);
+            }
         }
 
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -26,15 +36,29 @@ namespace SparqlForHumans.Server
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(options =>
-        {
-            options.AddPolicy(MyAllowSpecificOrigins,
-            builder =>
             {
-                builder.WithOrigins("http://localhost:4200")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
+                options.AddPolicy(MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")  // connections from RDFexplorer
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                    });
+                options.AddPolicy(MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")  // connections from Viziquer
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                    });
             });
-        });
+
+            // custom sections awailable for controllers
+            var section = Configuration.GetSection(nameof(LuceneConfig));
+            var luceneConfig = section.Get<LuceneConfig>();
+
+            services.AddSingleton(luceneConfig);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,5 +21,10 @@ namespace SparqlForHumans.Utilities
             using JsonWriter writer = new JsonTextWriter(sw);
             serializer.Serialize(writer, objectToSerialize);
         }
+
+        public static string SerializeJsonString(this object objectToSerialize)
+        {
+            return JsonConvert.SerializeObject(objectToSerialize);
+        }
     }
 }

@@ -50,11 +50,18 @@ namespace SparqlForHumans.CLI
                 HelpText = "Limit of Q values. For testing purposes.")]
             public int Limit { get; set; }
 
-            [Option('o', "overwrite",
+            [Option('x', "overwrite",
                 Required = false,
                 Default = true,
                 HelpText = "Overwrite existing index contents.")]
             public bool Overwrite { get; set; }
+
+            [Option('b', "basefolder",
+                Required = false,
+                Default = "",
+                HelpText = "Base Folder where index files and directories will be created")]
+            public string BaseFolder { get; set; }
+
         }
 
         public static void Main(string[] args)
@@ -75,7 +82,13 @@ namespace SparqlForHumans.CLI
                     Logger.Info($"InputFilename: {o.InputFilename}");
                     Logger.Info($"Limit: {o.Limit}");
                     Logger.Info($"Overwrite: {o.Overwrite}");
+                    Logger.Info($"BaseFolder: {o.BaseFolder}");
                     Logger.Info($"Logs output: {logFilename}");
+
+                    if (!string.IsNullOrEmpty(o.BaseFolder))
+                    {
+                        LuceneDirectoryDefaults.SetBaseFolder(o.BaseFolder);
+                    }
 
                     var entitiesOutputPath = LuceneDirectoryDefaults.EntityIndexPath;
                     var propertiesOutputPath = LuceneDirectoryDefaults.PropertyIndexPath;

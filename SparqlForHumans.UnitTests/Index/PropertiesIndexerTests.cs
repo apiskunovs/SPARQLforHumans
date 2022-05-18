@@ -251,7 +251,7 @@ namespace SparqlForHumans.UnitTests.Index
                     doc.GetValue(Labels.Description));
 
                 //Frequency
-                Assert.Equal("3", doc.GetValue(Labels.Rank));
+                Assert.Equal("3.0", doc.GetValue(Labels.Rank));
             }
 
             propertiesIndexPath.DeleteIfExists();

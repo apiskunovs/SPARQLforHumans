@@ -4,8 +4,8 @@ namespace SparqlForHumans.Models
 {
     public class Property : Subject, IProperty
     {
-        public string Value { get; set; } = string.Empty;
-        public int Rank { get; set; } = 0;
+        //public string Value { get; set; } = string.Empty;
+        public double Rank { get; set; } = 0;
         public IList<int> Domain { get; set; } = new List<int>();
         public IList<string> AltLabels { get; set; } = new List<string>();
         public string Description { get; set; } = string.Empty;
@@ -16,10 +16,10 @@ namespace SparqlForHumans.Models
             return $"[{Rank}] {ToString()}";
         }
 
-        public override string ToString()
-        {
-            var basic = $"{base.ToString()}";
-            return string.IsNullOrWhiteSpace(Value) ? basic : $"{basic} -> {Value}";
-        }
+        //public override string ToString()
+        //{
+        //    var basic = $"{base.ToString()}";
+        //    return string.IsNullOrWhiteSpace(Value) ? basic : $"{basic} -> {Value}";
+        //}
     }
 }

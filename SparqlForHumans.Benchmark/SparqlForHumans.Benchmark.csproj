@@ -23,13 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00016" />
     <PackageReference Include="NaturalSort.Extension" Version="3.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\LuceneBinaries\Lucene.Net.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

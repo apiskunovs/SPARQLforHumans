@@ -162,7 +162,7 @@ namespace SparqlForHumans.Lucene.Extensions
         {
             return new Property {
                 Id = propertyId,
-                Value = string.Empty,
+                //Value = string.Empty,
                 //TODO: Fix this somehow :D
                 Label = string.Empty
             };

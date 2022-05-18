@@ -139,7 +139,9 @@ namespace SparqlForHumans.RDF.FilterReorderSort
 
                 if (!objct.StartsWith(subjectPrefix))
                 {
-                    return false;
+                    //<Q> <P> "" - tripple still ok, e.g., P18 property
+                    if (!objct.StartsWith("\""))
+                        return false;
                 }
                 else
                 {

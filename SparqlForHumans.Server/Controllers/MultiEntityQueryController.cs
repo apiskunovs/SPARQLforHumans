@@ -10,9 +10,14 @@ namespace SparqlForHumans.Server.Controllers
     [Route("api/[controller]")]
     public class MultiEntityQueryController : Controller
     {
+        private readonly NLog.Logger _logger = Logger.Logger.Init();
+
         public IActionResult Run(string term)
         {
+            _logger.Info("MultiEntityQuery Start");
+            _logger.Info($"Incoming term: {term}");
             var filteredItems = new MultiLabelEntityQuery(LuceneDirectoryDefaults.EntityIndexPath, term).Query();
+            _logger.Info("MultiEntityQuery Query");
             return Json(filteredItems);
         }
     }

@@ -44,13 +44,13 @@ namespace SparqlForHumans.UnitTests.Query
                 {
                     new Property
                     {
-                        Id = "P17",
-                        Value = "Q145"
+                        Id = "P17"
+                        //,                        Value = "Q145"
                     },
                     new Property
                     {
-                        Id = "P47",
-                        Value = "Q27"
+                        Id = "P47"
+                        //,                        Value = "Q27"
                     },
                     new Property
                     {
@@ -58,8 +58,8 @@ namespace SparqlForHumans.UnitTests.Query
                     },
                     new Property
                     {
-                        Id = "P131",
-                        Value = "Q145"
+                        Id = "P131"
+                        //,                        Value = "Q145"
                     },
                     new Property
                     {
@@ -142,18 +142,15 @@ namespace SparqlForHumans.UnitTests.Query
                 {
                     new Property
                     {
-                        Id = "P17",
-                        Value = "Q145"
+                        Id = "P17"//,                        Value = "Q145"
                     },
                     new Property
                     {
-                        Id = "P47",
-                        Value = "Q27"
+                        Id = "P47"//,                        Value = "Q27"
                     },
                     new Property
                     {
-                        Id = "P131",
-                        Value = "Q145"
+                        Id = "P131"//,                        Value = "Q145"
                     },
                     new Property
                     {

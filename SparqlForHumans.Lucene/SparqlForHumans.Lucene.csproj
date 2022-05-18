@@ -16,6 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="dotNetRDF" Version="2.2.0" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.Queries" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.Sandbox" Version="4.8.0-beta00016" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,24 +29,6 @@
     <ProjectReference Include="..\SparqlForHumans.RDF\SparqlForHumans.RDF.csproj" />
     <ProjectReference Include="..\SparqlForHumans.Utilities\SparqlForHumans.Utilities.csproj" />
     <ProjectReference Include="..\SparqlForHumans.Wikidata\SparqlForHumans.Wikidata.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\LuceneBinaries\Lucene.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Analysis.Common">
-      <HintPath>..\LuceneBinaries\Lucene.Net.Analysis.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Queries">
-      <HintPath>..\LuceneBinaries\Lucene.Net.Queries.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.QueryParser">
-      <HintPath>..\LuceneBinaries\Lucene.Net.QueryParser.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Sandbox">
-      <HintPath>..\LuceneBinaries\Lucene.Net.Sandbox.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
